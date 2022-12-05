@@ -10,6 +10,7 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -21,16 +22,18 @@ const db = knex({
     }
 });
 
+
+
 const app = express()  // use express
 app.use(bodyParser.json())    //use bodyParser.json for handle json
 app.use(cors())
-
 
 app.get('/', (req, res) => { res.send('success') })
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
-app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) }) //what we pass to this function
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
+
 
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) })
 
